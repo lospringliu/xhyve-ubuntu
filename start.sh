@@ -8,8 +8,8 @@ if [ "$(whoami)" != "root" ]; then
     exit 1
 fi
 
-memgb=2
-cpus=1
+memgb=16
+cpus=4
 
 xhyve \
     -A \
@@ -19,6 +19,7 @@ xhyve \
     -s 0,hostbridge \
     -s 2,virtio-net \
     -s 4,virtio-blk,storage.img \
+    -s 5,virtio-blk,data1.img \
     -s 31,lpc \
     -l com1,stdio \
-	-f "kexec,boot/vmlinuz-4.4.0-131-generic,boot/initrd.img-4.4.0-131-generic,earlyprintk=serial console=ttyS0 root=/dev/vda1 ro"
+	-f "kexec,boot/vmlinuz-4.15.0-45-generic,boot/initrd.img-4.15.0-45-generic,earlyprintk=serial console=ttyS0 root=/dev/vda1 ro"
